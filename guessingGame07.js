@@ -7,18 +7,33 @@ const rl = readline.createInterface({
 
 let secretNumber;
 
- function checkGuess(n) {
-    if(n > secretNumber) {
+ function checkGuess(num) {
+     if(num > secretNumber) {
         console.log("Too high")
         return false;
     }
-    if(n < secretNumber) {
+    if(num < secretNumber) {
         console.log("Too low")
         return false;
     }
-    if(n === secretNumber) {
+    if(num === secretNumber) {
         console.log("Correct!")
         return true;
     }
  }
 
+
+ function askGuess() {
+    rl.question('Enter a guess ', (answer) => {
+        let num = Number(answer)
+
+     if(checkGuess(num) === false) {
+        askGuess();
+     }
+
+    else{
+        console.log("You Win!")
+        rl.close()
+     }
+    })
+ }  
